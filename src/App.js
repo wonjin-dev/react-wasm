@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import createModule from './matrix.mjs';
+import matrixModule from './matrix.mjs';
+import addModule from './add.mjs';
 
 const App = () => {
 	const [addFunction, setAddFunction] = useState(null);
 	const [matrixMultiplyFunction, setMatrixMultiplyFunction] = useState(null);
 
 	useEffect(() => {
-		createModule().then((Module) => {
-			// ems컴파일러 컴파일된 C 함수를 호출하는 가장 쉬운 방법 cwrap
-			setAddFunction(() => Module.cwrap('add', 'number', ['number', 'number']));
+		matrixModule().then((Module) => {
 			setMatrixMultiplyFunction(() => wrapMatrixMultiply(Module));
+		});
+
+		addModule().then((Module) => {
+			setAddFunction(() => Module.cwrap('add', 'number', ['number', 'number']));
 		});
 	}, []);
 

@@ -20,8 +20,3 @@ EMSCRIPTEN_KEEPALIVE float *matrixMultiply(float *arg1, float *arg2, float *resu
 
     return (result);
 }
-
-EMSCRIPTEN_KEEPALIVE int add(int a, int b)
-{
-    return (a + b);
-}
